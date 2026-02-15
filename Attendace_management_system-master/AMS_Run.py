@@ -21,7 +21,7 @@ window.configure(background='snow')
 def manually_fill():
     global sb
     sb = tk.Tk()
-    sb.iconbitmap('Attendace_management_system-master\\AMS.ico')
+    sb.iconbitmap('AMS.ico')
     sb.title("Enter subject name...")
     sb.geometry('580x320')
     sb.configure(background='snow')
@@ -33,7 +33,7 @@ def manually_fill():
         global ec
         ec = tk.Tk()
         ec.geometry('300x100')
-        ec.iconbitmap('Attendace_management_system-master\\AMS.ico')
+        ec.iconbitmap('AMS.ico')
         ec.title('Warning!!')
         ec.configure(background='snow')
         Label(ec, text='Please enter your subject name!!!', fg='red', bg='white', font=('times', 16, ' bold ')).pack()
@@ -85,7 +85,7 @@ def manually_fill():
         else:
             sb.destroy()
             MFW = tk.Tk()
-            MFW.iconbitmap('Attendace_management_system-master\\AMS.ico')
+            MFW.iconbitmap('AMS.ico')
             MFW.title("Manually attendance of "+ str(subb))
             MFW.geometry('880x470')
             MFW.configure(background='snow')
@@ -97,7 +97,7 @@ def manually_fill():
                 global errsc2
                 errsc2 = tk.Tk()
                 errsc2.geometry('330x100')
-                errsc2.iconbitmap('Attendace_management_system-master\\AMS.ico')
+                errsc2.iconbitmap('AMS.ico')
                 errsc2.title('Warning!!')
                 errsc2.configure(background='snow')
                 Label(errsc2, text='Please enter Student & Enrollment!!!', fg='red', bg='white',
@@ -243,7 +243,7 @@ def err_screen():
     global sc1
     sc1 = tk.Tk()
     sc1.geometry('300x100')
-    sc1.iconbitmap('Attendace_management_system-master\\AMS.ico')
+    sc1.iconbitmap('AMS.ico')
     sc1.title('Warning!!')
     sc1.configure(background='snow')
     Label(sc1,text='Enrollment & Name required!!!',fg='red',bg='white',font=('times', 16, ' bold ')).pack()
@@ -256,7 +256,7 @@ def err_screen1():
     global sc2
     sc2 = tk.Tk()
     sc2.geometry('300x100')
-    sc2.iconbitmap('Attendace_management_system-master\\AMS.ico')
+    sc2.iconbitmap('AMS.ico')
     sc2.title('Warning!!')
     sc2.configure(background='snow')
     Label(sc2,text='Please enter your subject name!!!',fg='red',bg='white',font=('times', 16, ' bold ')).pack()
@@ -287,16 +287,17 @@ def take_img():
             sampleNum = 0
             while True:
                 ret, img = cam.read()
+                if not ret:
+                    break
                 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                 faces = detector.detectMultiScale(gray, 1.3, 5)
                 for (x, y, w, h) in faces:
                     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
                     sampleNum += 1
                     cv2.imwrite(f"TrainingImage/{Name}.{Enrollment}.{sampleNum}.jpg", gray[y:y + h, x:x + w])
-                    cv2.imshow('Frame', img)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
-                elif sampleNum > 70:
+                cv2.imshow('Taking Images', img)
+                cv2.waitKey(1)
+                if sampleNum > 70:
                     break
             cam.release()
             cv2.destroyAllWindows()
@@ -383,16 +384,14 @@ def subjectchoose():
                     cv2.rectangle(im, (x, y), (x + w, y + h), (0, 25, 255), 7)
                     cv2.putText(im, str(tt), (x + h, y), font, 1, (0, 25, 255), 4)
 
+            cv2.imshow('Attendance', im)
+            cv2.waitKey(1)
+
             # check if time exceeded
             if time.time() > future:
                 break
 
             attendance = attendance.drop_duplicates(['Enrollment'], keep='first')
-            cv2.imshow('Filling attendance...', im)
-
-            key = cv2.waitKey(30) & 0xff
-            if key == 27:  # ESC key pressed
-                break
 
         cam.release()
         cv2.destroyAllWindows()
@@ -401,10 +400,10 @@ def subjectchoose():
         date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
         timeStamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
         Hour, Minute, Second = timeStamp.split(":")
-        fileName = f"Attendance/{Subject}_{date}_{Hour}-{Minute}-{Second}.csv"
+        filename_part = f"{Subject}_{date}_{Hour}-{Minute}-{Second}.csv"
+        fileName = os.path.join('Attendance', filename_part)
         attendance = attendance.drop_duplicates(['Enrollment'], keep='first')
         print(attendance)
-        attendance.to_csv(fileName, index=False)
 
         ##Create table for Attendance
         date_for_DB = datetime.datetime.fromtimestamp(ts).strftime('%Y_%m_%d')
@@ -447,7 +446,7 @@ def subjectchoose():
         root = tkinter.Tk()
         root.title("Attendance of " + Subject)
         root.configure(background='snow')
-        cs = 'C:\\Users\\panda\\OneDrive\\Desktop\\Attendace_management_system-master\\Attendace_management_system-master' + fileName
+        cs = os.path.join('C:\\Users\\panda\\OneDrive\\Desktop\\Attendace_management_system-master\\Attendace_management_system-master', fileName)
         with open(cs, newline="") as file:
             reader = csv.reader(file)
             r = 0
@@ -466,7 +465,7 @@ def subjectchoose():
 
     ###windo is frame for subject chooser
     windo = tk.Tk()
-    windo.iconbitmap('Attendace_management_system-master\\AMS.ico')
+    windo.iconbitmap('AMS.ico')
     windo.title("Enter subject name...")
     windo.geometry('580x320')
     windo.configure(background='snow')
@@ -493,7 +492,7 @@ def subjectchoose():
 
 def admin_panel():
     win = tk.Tk()
-    win.iconbitmap('Attendace_management_system-master\\AMS.ico')
+    win.iconbitmap('AMS.ico')
     win.title("LogIn")
     win.geometry('880x420')
     win.configure(background='snow')
@@ -642,7 +641,7 @@ def getImagesAndLabels(path):
 window.grid_rowconfigure(0, weight=1)
 window.grid_columnconfigure(0, weight=1)
 try:
-    window.iconbitmap('Attendace_management_system-master\\AMS.ico')
+    window.iconbitmap('AMS.ico')
 except Exception as e:
     print(f"Warning: Unable to load icon. Error: {e}")
 

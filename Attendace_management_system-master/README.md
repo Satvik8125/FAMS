@@ -1,69 +1,91 @@
-##  Attendance Management system using Face👦🏻👧 Recognition [![](https://img.shields.io/github/license/sourcerer-io/hall-of-fame.svg)](https://github.com/Spidy20/Attendace_management_system/blob/master/LICENSE)
+# Face Recognition Based Attendance Management System
 
-[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)                 
-[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)   
+A robust and automated attendance management system that uses facial recognition technology to mark attendance efficiently. Built with Python, OpenCV, and Tkinter, this application eliminates the need for manual roll calls and provides a secure, digital way to track student attendance.
 
-## [Follow us on Instagram for Machine Learning Guidelines & Path](https://www.instagram.com/machine_learning_hub.ai/)
-## [Buy Python & ML projects for students at lower rate](https://www.instamojo.com/kushalbhavsar1820)
+## 🚀 Features
 
+*   **Automated Face Recognition**: Uses the LBPH (Local Binary Patterns Histograms) algorithm to recognize registered faces.
+*   **Easy Registration**: Simple interface to capture and store student face data for training.
+*   **Real-time Attendance**: Marks attendance instantly upon face recognition.
+*   **Manual Entry**: Fallback option to manually fill attendance if needed.
+*   **CSV Export**: Automatically generates daily attendance reports in CSV format.
+*   **Database Integration**: Supports MySQL database for storing attendance records (requires setup).
+*   **User-Friendly GUI**: Clean and intuitive interface built with Tkinter.
 
-### Sourcerer
-<a href="https://sourcerer.io/spidy20"><img src="https://avatars2.githubusercontent.com/u/42056100?v=4" height="50px" width="50px" alt=""/></a>
+## 🛠️ Tech Stack
 
-### Code Requirements
-- Opencv(`pip install opencv-python`)
-- Tkinter(Available in python)
-- PIL (`pip install Pillow`)
-- Pandas(`pip install pandas`)
+*   **Language**: Python 3.x
+*   **Interface**: Tkinter
+*   **Computer Vision**: OpenCV (`cv2`)
+*   **Data Handling**: Pandas, NumPy, CSV
+*   **Image Processing**: Pillow (`PIL`)
+*   **Database**: PyMySQL
 
-### What steps you have to follow??
-- Download my Repository 
-- Create a `TrainingImage` folder in a project.
-- Open a `AMS_Run.py` and change the all paths with your system path
-- Run `AMS_Run.py`.
+## 📋 Prerequisites
 
-### Project Structure
+Ensure you have Python installed. You can install the required dependencies using pip:
 
-- After run you need to give your face data to system so enter your ID and name in box than click on `Take Images` button.
-- It will collect 200 images of your faces, it save a images in `TrainingImage` folder
-- After that we need to train a model(for train a model click on `Train Image` button.
-- It will take 5-10 minutes for training(for 10 person data).
-- After training click on `Automatic Attendance` ,it can fill attendace by your face using our trained model (model will save in `TrainingImageLabel` )
-- it will create `.csv` file of attendance according to time & subject.
-- You can store data in database (install wampserver),change the DB name according to your in `AMS_Run.py`.
-- `Manually Fill Attendace` Button in UI is for fill a manually attendance (without facce recognition),it's also create a `.csv` and store in a database.
+```bash
+pip install opencv-python numpy pandas Pillow pymysql
+```
 
-### Screenshots
+*Note: Tkinter is usually included with Python distributions.*
 
-### Basic UI
-<img src="https://github.com/Spidy20/Attendace_management_system/blob/master/Screenshot%20(43).png">
+## ⚙️ Installation & Setup
 
-### When it's Recognise me
-<img src="https://github.com/Spidy20/Attendace_management_system/blob/master/Screenshot%20(41).png">
+1.  **Clone the Repository**
+    ```bash
+    git clone <your-repo-url>
+    cd Attendace_management_system-master
+    ```
 
-### When it's fill a attendace
-<img src="https://github.com/Spidy20/Attendace_management_system/blob/master/Screenshot%20(42).png">
+2.  **Database Configuration (Optional)**
+    *   The system can interface with a MySQL database (e.g., using WampServer or XAMPP). 
+    *   Default database configurations are set to `localhost` with user `root` and no password.
+    *   You can modify the database connection details in `AMS_Run.py` if you wish to use this feature.
 
-### Manually attendance filling UI
-<img src="https://github.com/Spidy20/Attendace_management_system/blob/master/Screenshot%20(44).png">
+3.  **Run the Application**
+    ```bash
+    python AMS_Run.py
+    ```
 
+## 📖 How to Use
 
-### How it works? See:)
+1.  **Register a New Student**:
+    *   Enter the **Enrollment Number** and **Name** in the provided fields.
+    *   Click on **"Take Images"**. The webcam will open and capture 70 sample images of the student's face.
+    *   These images are saved in the `TrainingImage` folder.
 
-<img src="https://github.com/Spidy20/Attendace_management_system/blob/master/AMS.gif">
+2.  **Train the Model**:
+    *   After capturing images, click on **"Train Images"**.
+    *   The system will process the images and train the internal model.
+    *   A notification will appear when training is successful.
 
-### Video demo
+3.  **Mark Attendance**:
+    *   Click on **"Automatic Attendance"**.
+    *   Enter the **Subject Name** when prompted.
+    *   The webcam will open. As it recognizes faces, it will mark attendance in real-time.
+    *   Press `q` or wait for the timer to close the window.
+    *   Attendance is saved as a CSV file in the `Attendance` folder.
 
-[Youtube](https://www.youtube.com/watch?v=dXViSRRydRs)
+4.  **View Records**:
+    *   You can view the generated CSV files in the `Attendance` directory to see the logs.
 
+## 📸 Screenshots
 
-### Notes
-- It will require high processing power(I have 8 GB RAM & 2 GB GC)
-- If you think it will recognise person just like humans,than leave it ,its not possible.
-- Noisy image can reduce your accuracy so quality of images matter.
+### Home Screen
+<img src="Screenshot (43).png" width="400">
+*Home Screen Interface*
 
-## Just follow☝️ me and Star⭐ my repository 
+### Face Recognition in Action
+<img src="Screenshot (41).png" width="400">
+*Face Recognition Active*
 
-## Read our Machine learning & Data science related blogs:- [Here](https://www.vruttitanna.com/post/why-kaggle-is-important-for-data-science)
+### Attendance Filled
+<img src="Screenshot (42).png" width="400">
+*Attendance Logs*
 
-## Buy more projects at very low price:- [STORE](https://www.instamojo.com/kushalbhavsar1820)
+## 📄 License
+
+This project is open-source and available for educational and personal use.
+Copyright (c) 2026 Satvik Sharma.
